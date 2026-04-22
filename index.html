@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -10,9 +10,29 @@
         .sigma-bg { background-color: #050505; }
         .kartu-sigma { background-color: #121212; border: 1px solid #222; transition: 0.3s; }
         .kartu-sigma:hover { border-color: #eab308; }
+        /* Menyembunyikan panah default bawaan <details> */
         details summary::-webkit-details-marker { display: none; }
         details[open] summary { color: #eab308; }
-        .font-sigma { font-family: 'Georgia', serif; }
+        
+        /* CSS Khusus untuk Slider */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 0;
+        }
+        .slide.aktif {
+            opacity: 1;
+            z-index: 10;
+        }
+        .indikator.aktif {
+            background-color: #eab308;
+            width: 2rem;
+        }
     </style>
 </head>
 <body class="sigma-bg text-gray-300 font-sans">
@@ -25,29 +45,120 @@
                 <a href="#beranda" class="hover:text-yellow-500 transition">Beranda</a>
                 <a href="#latihan" class="hover:text-yellow-500 transition">Latihan</a>
                 <a href="#perbandingan" class="hover:text-yellow-500 transition">Perbandingan</a>
-                <a href="#video" class="hover:text-yellow-500 transition">Video</a>
                 <a href="#lokasi" class="hover:text-yellow-500 transition">Markas</a>
             </div>
             <a href="https://wa.me/6281770601202?text=Halo%20Sigma%2C%20saya%20siap%20berubah." class="bg-yellow-600 text-black px-5 py-2 rounded-full font-black text-[10px] hover:bg-yellow-400 transition">CHAT WA</a>
         </div>
     </nav>
 
-    <!-- Bagian Utama (Hero) -->
-    <header id="beranda" class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
-        <div class="max-w-4xl">
-            <!-- Foto GigaChad Meme -->
-            <img src="https://static.wikia.nocookie.net/joke-battles/images/d/df/Gigachad.png/revision/latest/scale-to-width-down/340?cb=2023081206483" alt="GigaChad" class="w-40 h-40 md:w-56 md:h-56 object-cover rounded-full mx-auto mb-8 border-4 border-yellow-600 shadow-[0_0_50px_rgba(234,179,8,0.2)]">
-            
-            <h2 class="text-yellow-500 font-mono mb-4 tracking-[0.3em] text-sm md:text-base">KURIKULUM PEMBENTUKAN KARAKTER</h2>
-            <h1 class="text-5xl md:text-8xl font-black text-white mb-6 leading-none">PANDUAN SIGMA SEJATI</h1>
-            <p class="text-gray-400 text-lg md:text-xl mb-10 font-light">
-                Berhenti menjadi rata-rata. Mulailah perjalanan menuju puncak tanpa perlu pengakuan dunia. 100% Berhasil.
-            </p>
-            <a href="#latihan" class="bg-white text-black px-10 py-4 font-black rounded-sm hover:bg-yellow-500 transition-all duration-300 inline-block">MULAI LATIHAN SEKARANG</a>
+    <!-- Bagian Utama (Hero) Berupa Slider -->
+    <header id="beranda" class="relative w-full h-screen bg-black overflow-hidden">
+        
+        <!-- Slide 1: Judul Presentasi -->
+        <div class="slide aktif bg-gradient-to-b from-neutral-900 to-black flex items-center justify-center text-center px-6">
+            <!-- PENTING: Gambar ini mengambil dari file slide1.jpg yang harus kamu upload ke Github -->
+            <img src="slide1.jpg" onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1920&auto=format&fit=crop'" class="absolute inset-0 w-full h-full object-cover opacity-30" alt="Latar Belakang Pria Jas dari PPT">
+            <div class="relative z-20 max-w-4xl">
+                <h2 class="text-yellow-500 font-mono mb-4 tracking-[0.3em] text-sm md:text-base uppercase border-b border-yellow-500/30 pb-2 inline-block">Dipimpin Hisyam Fondation</h2>
+                <h1 class="text-5xl md:text-8xl font-black text-white mb-6 leading-none tracking-tighter">CARA MENJADI SIGMA</h1>
+                <p class="text-yellow-600 text-3xl md:text-5xl mb-10 font-black uppercase italic tracking-widest">
+                    100% Bekerja
+                </p>
+                <button onclick="geserSlide(1)" class="bg-white text-black px-10 py-4 font-black rounded-sm hover:bg-yellow-500 transition-all duration-300 inline-block uppercase">Bersiaplah!</button>
+            </div>
         </div>
+
+        <!-- Slide 2: Progres Klien (Before/After) -->
+        <div class="slide bg-neutral-950 flex flex-col items-center justify-center text-center px-6">
+            <div class="relative z-20 w-full max-w-5xl">
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-2 uppercase tracking-tight">Progres Klien</h2>
+                <p class="text-yellow-500 text-lg md:text-xl font-mono mb-10 uppercase">Dari Hari ke 1 - Ke Hari 30</p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                    <!-- Before -->
+                    <div class="text-center">
+                        <div class="w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-4 border-red-800 shadow-[0_0_30px_rgba(220,38,38,0.2)] mb-4 mx-auto">
+                            <!-- Foto Raja -->
+                            <img src="raja.jpg" alt="Sebelum (Beta)" class="w-full h-full object-cover">
+                        </div>
+                        <span class="bg-red-900 text-white px-6 py-2 rounded font-black uppercase tracking-widest">Sebelum</span>
+                    </div>
+                    
+                    <!-- Panah -->
+                    <div class="hidden md:block text-yellow-600 text-6xl font-black">
+                        &#8594;
+                    </div>
+                    <div class="block md:hidden text-yellow-600 text-5xl font-black my-4">
+                        &#8595;
+                    </div>
+
+                    <!-- After -->
+                    <div class="text-center">
+                        <div class="w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-4 border-yellow-500 shadow-[0_0_40px_rgba(234,179,8,0.4)] mb-4 mx-auto">
+                            <!-- Foto Hisyam -->
+                            <img src="hisyam.jpg" alt="Sesudah (Sigma)" class="w-full h-full object-cover object-top">
+                        </div>
+                        <span class="bg-yellow-600 text-black px-6 py-2 rounded font-black uppercase tracking-widest">Sesudah</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Fasilitas Markas -->
+        <div class="slide bg-black flex items-center justify-center text-left px-6">
+            <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1920&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-20" alt="Latar Belakang Markas">
+            <div class="relative z-20 max-w-5xl w-full grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-2 uppercase">Markas Terkini</h2>
+                    <p class="text-yellow-500 text-xl font-mono mb-10 italic">Untuk Perkumpulan Sigma</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <span class="text-yellow-600 font-black text-4xl mr-6">01</span>
+                            <div>
+                                <h3 class="text-white font-bold text-xl uppercase tracking-widest mb-1">Garansi Sigma</h3>
+                                <p class="text-gray-400 text-sm">Tergaransi akan menjadi sigma dalam 30 hari.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-yellow-600 font-black text-4xl mr-6">02</span>
+                            <div>
+                                <h3 class="text-white font-bold text-xl uppercase tracking-widest mb-1">Sekolah Alpha</h3>
+                                <p class="text-gray-400 text-sm">Sekolah untuk orang-orang pemimpin.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-yellow-600 font-black text-4xl mr-6">03</span>
+                            <div>
+                                <h3 class="text-white font-bold text-xl uppercase tracking-widest mb-1">Sekolah Anti Beta</h3>
+                                <p class="text-gray-400 text-sm">Sekolah ini mentransformasikan seorang beta menjadi sigma atau alpha sesuai selera muridnya.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="border-4 border-yellow-600 rounded-2xl overflow-hidden h-96">
+                        <!-- Map Slide 3 -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.88338950212!2d110.39572627476595!3d-7.791583092228308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599723000001%3A0xc4805822363a0a3b!2sSMA%20Negeri%208%20Yogyakarta!5e0!3m2!1sid!2sid!4v1716300000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tombol Geser Slider Kiri/Kanan -->
+        <button onclick="geserSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-yellow-600 text-white w-12 h-12 rounded-full flex items-center justify-center z-30 transition border border-white/20">&#10094;</button>
+        <button onclick="geserSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-yellow-600 text-white w-12 h-12 rounded-full flex items-center justify-center z-30 transition border border-white/20">&#10095;</button>
+
+        <!-- Titik Indikator Slider -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
+            <button onclick="loncatSlide(0)" class="indikator w-3 h-3 rounded-full bg-white/50 transition-all duration-300 aktif"></button>
+            <button onclick="loncatSlide(1)" class="indikator w-3 h-3 rounded-full bg-white/50 transition-all duration-300"></button>
+            <button onclick="loncatSlide(2)" class="indikator w-3 h-3 rounded-full bg-white/50 transition-all duration-300"></button>
+        </div>
+
     </header>
 
-    <!-- 6 Latihan Sigma -->
+    <!-- 6 Latihan Sigma dengan Deskripsi Panjang & Tombol Singkatkan -->
     <section id="latihan" class="py-24 px-6 bg-black/30">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
@@ -57,80 +168,99 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Latihan 1: Fisik -->
-                <div class="kartu-sigma p-8 rounded-2xl">
+                <!-- Pilar 1 -->
+                <div class="kartu-sigma p-8 rounded-2xl relative">
                     <div class="text-yellow-600 text-4xl mb-4 font-black">01</div>
                     <h4 class="text-xl font-bold text-white mb-4">Latihan Fisik Ekstrem</h4>
                     <details class="group">
-                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline">BACA SELENGKAPNYA (+)</summary>
-                        <div class="mt-4 text-sm text-gray-400 leading-relaxed">
-                            Seorang Sigma harus memiliki tubuh yang siap tempur. Fokus pada angkat beban dan ketahanan. <br>
-                            <a href="https://www.youtube.com/watch?v=M9-H6Xp_pXk" target="_blank" class="text-blue-400 underline mt-2 block">Lihat Video Terkait</a>
+                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline mb-2">BACA SELENGKAPNYA (+)</summary>
+                        <div class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-neutral-800 pt-4">
+                            Latihan fisik bukan hanya tentang membentuk otot yang bagus, melainkan tentang menempa kedisiplinan dan menghancurkan rasa malas. Lakukan olahraga beban 4 hingga 5 kali dalam seminggu ditambah dengan latihan kardio. Di saat ototmu mulai terasa lelah dan pikiranmu menyuruh untuk berhenti, di situlah mental Sigma sesungguhnya diuji. Rasa sakit dan keringat hari ini adalah kekuatan tak terkalahkan di masa depan. Jangan pernah mencari-cari alasan untuk bolos latihan.
+                            <br><br>
+                            <a href="https://www.youtube.com/watch?v=y8OzRym_eW0" target="_blank" class="text-blue-400 hover:text-yellow-500 transition underline block italic font-bold mb-4">Tonton Panduan Latihan Ekstrem</a>
+                            
+                            <!-- Tombol untuk nyingkat lagi -->
+                            <button onclick="this.closest('details').removeAttribute('open')" class="bg-red-900 hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-bold transition uppercase">Tutup / Singkatkan</button>
                         </div>
                     </details>
                 </div>
 
-                <!-- Latihan 2: Mewing -->
-                <div class="kartu-sigma p-8 rounded-2xl border-yellow-600/40">
+                <!-- Pilar 2 -->
+                <div class="kartu-sigma p-8 rounded-2xl border-yellow-600/40 relative">
                     <div class="text-yellow-600 text-4xl mb-4 font-black">02</div>
                     <h4 class="text-xl font-bold text-white mb-4">Teknik Mewing Benar</h4>
                     <details class="group">
-                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline">BACA SELENGKAPNYA (+)</summary>
-                        <div class="mt-4 text-sm text-gray-400 leading-relaxed">
-                            Perbaiki struktur wajah dengan menempelkan lidah ke langit-langit mulut. Jangan biarkan mulut terbuka saat istirahat. <br>
-                            <a href="https://www.youtube.com/watch?v=3MNPhH-98Fw" target="_blank" class="text-blue-400 underline mt-2 block">Lihat Video Terkait</a>
+                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline mb-2">BACA SELENGKAPNYA (+)</summary>
+                        <div class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-neutral-800 pt-4">
+                            Mewing adalah teknik ampuh untuk memperbaiki struktur tulang rahang dan wajah secara alami. Caranya, posisikan seluruh bagian lidahmu (bukan hanya ujungnya saja) menempel erat di langit-langit mulut. Lakukan ini setiap detik hingga menjadi kebiasaan tak sadar. Pastikan kamu selalu bernapas melalui hidung (nose breathing), bukan melalui mulut, untuk mencegah postur wajah turun. Hasilnya memang membutuhkan waktu berbulan-bulan, jadi kuncinya adalah konsistensi seumur hidup.
+                            <br><br>
+                            <a href="https://www.youtube.com/watch?v=ndmWul5vF3E" target="_blank" class="text-blue-400 hover:text-yellow-500 transition underline block italic font-bold mb-4">Tonton Teknik Mewing</a>
+                            
+                            <button onclick="this.closest('details').removeAttribute('open')" class="bg-red-900 hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-bold transition uppercase">Tutup / Singkatkan</button>
                         </div>
                     </details>
                 </div>
 
-                <!-- Latihan 3: Mental -->
-                <div class="kartu-sigma p-8 rounded-2xl">
+                <!-- Pilar 3 -->
+                <div class="kartu-sigma p-8 rounded-2xl relative">
                     <div class="text-yellow-600 text-4xl mb-4 font-black">03</div>
                     <h4 class="text-xl font-bold text-white mb-4">Ketahanan Mental</h4>
                     <details class="group">
-                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline">BACA SELENGKAPNYA (+)</summary>
-                        <div class="mt-4 text-sm text-gray-400 leading-relaxed">
-                            Jangan pernah bereaksi berlebihan terhadap hinaan. Sigma tetap tenang dalam badai apa pun. <br>
-                            <a href="https://www.youtube.com/watch?v=W0Z6B7q7OqE" target="_blank" class="text-blue-400 underline mt-2 block">Lihat Video Terkait</a>
+                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline mb-2">BACA SELENGKAPNYA (+)</summary>
+                        <div class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-neutral-800 pt-4">
+                            Seorang Sigma wajib menguasai pikirannya sendiri. Terapkan prinsip Stoikisme: jangan pernah biarkan hinaan, kritik tak berdasar, atau drama kehidupan orang lain merusak emosimu. Jadilah seperti gunung batu yang tetap kokoh meski terus dihantam badai. Fokuslah hanya pada hal-hal yang bisa kamu kendalikan secara penuh, dan abaikan sisanya. Ketenangan pikiran dan sikap acuh tak acuh pada drama adalah senjatamu yang paling menakutkan.
+                            <br><br>
+                            <a href="https://www.youtube.com/watch?v=1wq1AqihmVo" target="_blank" class="text-blue-400 hover:text-yellow-500 transition underline block italic font-bold mb-4">Tonton Edukasi Mental</a>
+                            
+                            <button onclick="this.closest('details').removeAttribute('open')" class="bg-red-900 hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-bold transition uppercase">Tutup / Singkatkan</button>
                         </div>
                     </details>
                 </div>
 
-                <!-- Latihan 4: Keuangan -->
-                <div class="kartu-sigma p-8 rounded-2xl">
+                <!-- Pilar 4 -->
+                <div class="kartu-sigma p-8 rounded-2xl relative">
                     <div class="text-yellow-600 text-4xl mb-4 font-black">04</div>
                     <h4 class="text-xl font-bold text-white mb-4">Kemandirian Dana</h4>
                     <details class="group">
-                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline">BACA SELENGKAPNYA (+)</summary>
-                        <div class="mt-4 text-sm text-gray-400 leading-relaxed">
-                            Bekerja keraslah tanpa pamer. Bangun kerajaanmu sendiri secara diam-diam. <br>
-                            <a href="https://www.youtube.com/watch?v=mC6H_4S_x-o" target="_blank" class="text-blue-400 underline mt-2 block">Lihat Video Terkait</a>
+                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline mb-2">BACA SELENGKAPNYA (+)</summary>
+                        <div class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-neutral-800 pt-4">
+                            Kemandirian finansial adalah kunci dari kebebasan sejati seorang pria. Mulailah mencari penghasilan tambahan sedini mungkin, pelajari cara kerja investasi, dan jangan pernah tergoda untuk menghamburkan uang demi membeli barang-barang mewah hanya untuk pamer pada orang lain. Seorang Sigma bekerja keras dalam keheningan, membangun aset berharganya, dan membiarkan kesuksesan finansialnya berbicara sendiri tanpa butuh validasi publik.
+                            <br><br>
+                            <a href="https://www.youtube.com/watch?v=hy8qQ8AX4zU" target="_blank" class="text-blue-400 hover:text-yellow-500 transition underline block italic font-bold mb-4">Tonton Mandiri Keuangan</a>
+                            
+                            <button onclick="this.closest('details').removeAttribute('open')" class="bg-red-900 hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-bold transition uppercase">Tutup / Singkatkan</button>
                         </div>
                     </details>
                 </div>
 
-                <!-- Latihan 5: Pengetahuan -->
-                <div class="kartu-sigma p-8 rounded-2xl">
+                <!-- Pilar 5 -->
+                <div class="kartu-sigma p-8 rounded-2xl relative">
                     <div class="text-yellow-600 text-4xl mb-4 font-black">05</div>
                     <h4 class="text-xl font-bold text-white mb-4">Kekuatan Otak</h4>
                     <details class="group">
-                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline">BACA SELENGKAPNYA (+)</summary>
-                        <div class="mt-4 text-sm text-gray-400 leading-relaxed">
-                            Baca buku satu jam setiap hari. Pengetahuan adalah modal utama untuk mendominasi. <br>
-                            <a href="https://www.youtube.com/watch?v=0P4Y9WkP2U4" target="_blank" class="text-blue-400 underline mt-2 block">Lihat Video Terkait</a>
+                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline mb-2">BACA SELENGKAPNYA (+)</summary>
+                        <div class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-neutral-800 pt-4">
+                            Otakmu adalah aset termahal yang kamu miliki. Berhenti merusak fokusmu dengan menonton video-video pendek (dopamin murahan) berjam-jam. Mulailah membiasakan diri membaca buku minimal 30 menit setiap hari. Pelajari keahlian-keahlian baru yang mahal di pasaran, pahami cara kerja psikologi manusia, dan jadilah pria yang cerdas secara taktis. Di dunia ini, orang yang berhenti menambah ilmunya akan segera tertinggal dan terkalahkan.
+                            <br><br>
+                            <a href="https://www.youtube.com/watch?v=6LVO4aMMuZA&t=111s" target="_blank" class="text-blue-400 hover:text-yellow-500 transition underline block italic font-bold mb-4">Tonton Melatih Otak</a>
+                            
+                            <button onclick="this.closest('details').removeAttribute('open')" class="bg-red-900 hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-bold transition uppercase">Tutup / Singkatkan</button>
                         </div>
                     </details>
                 </div>
 
-                <!-- Latihan 6: Kedisiplinan -->
-                <div class="kartu-sigma p-8 rounded-2xl">
+                <!-- Pilar 6 -->
+                <div class="kartu-sigma p-8 rounded-2xl relative">
                     <div class="text-yellow-600 text-4xl mb-4 font-black">06</div>
                     <h4 class="text-xl font-bold text-white mb-4">Kedisiplinan Besi</h4>
                     <details class="group">
-                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline">BACA SELENGKAPNYA (+)</summary>
-                        <div class="mt-4 text-sm text-gray-400 leading-relaxed">
-                            Bangun jam 4 pagi. Mandi air dingin. Lakukan hal sulit saat orang lain memilih yang mudah. <br>
-                            <a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="_blank" class="text-blue-400 underline mt-2 block">Lihat Video Terkait</a>
+                        <summary class="list-none text-yellow-500 font-bold text-sm cursor-pointer hover:underline mb-2">BACA SELENGKAPNYA (+)</summary>
+                        <div class="mt-4 text-sm text-gray-400 leading-relaxed border-t border-neutral-800 pt-4">
+                            Kedisiplinan adalah satu-satunya jembatan penghubung antara impianmu dan pencapaian nyatamu. Bangunlah di pagi hari sebelum matahari terbit, paksakan dirimu untuk mandi air dingin guna mengejutkan sistem saraf agar selalu siap tempur, dan kerjakan tugas yang paling sulit atau paling kamu benci terlebih dahulu. Biasakan dirimu melakukan hal yang benar, justru pada saat kamu sedang merasa sangat malas melakukannya.
+                            <br><br>
+                            <a href="https://www.youtube.com/shorts/B66sL0ydS_8" target="_blank" class="text-blue-400 hover:text-yellow-500 transition underline block italic font-bold mb-4">Tonton Disiplin Besi</a>
+                            
+                            <button onclick="this.closest('details').removeAttribute('open')" class="bg-red-900 hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-bold transition uppercase">Tutup / Singkatkan</button>
                         </div>
                     </details>
                 </div>
@@ -139,19 +269,23 @@
         </div>
     </section>
 
-    <!-- Tabel Perbandingan -->
+    <!-- Tabel Perbandingan dengan Foto Raja & Hisyam -->
     <section id="perbandingan" class="py-24 px-6 bg-neutral-900/40">
         <div class="max-w-5xl mx-auto">
             <h3 class="text-4xl font-black text-white text-center mb-16 italic">ANALISIS KARAKTER</h3>
             
             <div class="grid grid-cols-2 gap-4 mb-10">
+                <!-- Foto Beta (Raja) -->
                 <div class="text-center p-4 border border-red-900 bg-red-950/20 rounded-xl">
-                    <img src="https://static.tvtropes.org/pmwiki/pub/images/soy_jak_6.png" alt="Beta" class="w-32 h-32 mx-auto mb-4 rounded-lg object-cover">
-                    <h4 class="text-red-500 font-black uppercase">Karakter Beta</h4>
+                    <img src="raja.jpg" alt="Karakter Beta" class="w-32 h-32 mx-auto mb-4 rounded-lg object-cover shadow-[0_0_20px_rgba(220,38,38,0.3)]">
+                    <h4 class="text-red-500 font-black uppercase tracking-widest">Karakter Beta</h4>
+                    <p class="text-[10px] text-gray-500 mt-1 italic">Rata-rata & Lemah</p>
                 </div>
+                <!-- Foto Sigma (Hisyam) -->
                 <div class="text-center p-4 border border-green-900 bg-green-950/20 rounded-xl">
-                    <img src="https://i.pinimg.com/736x/8f/3b/3b/8f3b3b4a24c23f14a1f6a6c2f9d3b1f1.jpg" alt="Sigma" class="w-32 h-32 mx-auto mb-4 rounded-lg object-cover border-2 border-yellow-500">
-                    <h4 class="text-green-500 font-black uppercase">Karakter Sigma</h4>
+                    <img src="hisyam.jpg" alt="Karakter Sigma" class="w-32 h-32 mx-auto mb-4 rounded-lg object-cover border-2 border-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.3)] object-top">
+                    <h4 class="text-green-500 font-black uppercase tracking-widest">Karakter Sigma</h4>
+                    <p class="text-[10px] text-gray-500 mt-1 italic">Berwibawa & Fokus Visi</p>
                 </div>
             </div>
 
@@ -164,31 +298,31 @@
                             <th class="p-6">Sigma (Pemenang)</th>
                         </tr>
                     </thead>
-                    <tbody class="text-sm">
+                    <tbody class="text-sm text-gray-400">
                         <tr class="border-b border-neutral-900">
                             <td class="p-6 font-bold text-white italic">Fokus Hidup</td>
-                            <td class="p-6 text-gray-500">Mencari perhatian orang lain</td>
-                            <td class="p-6 text-white font-black italic">Fokus pada visi pribadi</td>
+                            <td class="p-6">Haus validasi media sosial</td>
+                            <td class="p-6 text-white font-black italic">Fokus membangun aset</td>
                         </tr>
                         <tr class="border-b border-neutral-900">
                             <td class="p-6 font-bold text-white italic">Validasi</td>
-                            <td class="p-6 text-gray-500">Butuh dipuji orang lain</td>
-                            <td class="p-6 text-white font-black italic">Hanya butuh diri sendiri</td>
+                            <td class="p-6">Sangat butuh pujian orang</td>
+                            <td class="p-6 text-white font-black italic">Hanya percaya hasil nyata</td>
                         </tr>
                         <tr class="border-b border-neutral-900">
                             <td class="p-6 font-bold text-white italic">Produktivitas</td>
-                            <td class="p-6 text-gray-500">Banyak bicara sedikit kerja</td>
-                            <td class="p-6 text-white font-black italic">Bekerja dalam diam</td>
+                            <td class="p-6">Banyak rencana tanpa aksi</td>
+                            <td class="p-6 text-white font-black italic">Eksekusi dalam diam</td>
                         </tr>
                         <tr class="border-b border-neutral-900">
                             <td class="p-6 font-bold text-white italic">Pergaulan</td>
-                            <td class="p-6 text-gray-500">Takut kesepian</td>
-                            <td class="p-6 text-white font-black italic">Menikmati kesunyian</td>
+                            <td class="p-6">Cari teman demi eksistensi</td>
+                            <td class="p-6 text-white font-black italic">Pilih-pilih lingkaran dalam</td>
                         </tr>
                         <tr class="border-b border-neutral-900">
                             <td class="p-6 font-bold text-white italic">Kepemimpinan</td>
-                            <td class="p-6 text-gray-500">Lemah dan reaktif</td>
-                            <td class="p-6 text-white font-black italic">Tegas dan mandiri</td>
+                            <td class="p-6">Sering mengeluh & pasif</td>
+                            <td class="p-6 text-white font-black italic">Ambil tanggung jawab penuh</td>
                         </tr>
                     </tbody>
                 </table>
@@ -196,42 +330,44 @@
         </div>
     </section>
 
-    <!-- Bagian Video Motivasi (DIPASANG KEMBALI) -->
+    <!-- Bagian Video Motivasi (Tetap Ada) -->
     <section id="video" class="py-24 px-6 bg-black">
         <div class="max-w-4xl mx-auto text-center">
             <h3 class="text-3xl font-black text-white mb-8 uppercase italic">Asupan Motivasi Harian</h3>
-            <div class="rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(234,179,8,0.15)] border-4 border-neutral-900">
-                <iframe width="100%" height="450" src="https://www.youtube.com/embed/3MNPhH-98Fw" title="Motivasi Sigma" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(234,179,8,0.15)] border-4 border-neutral-900 aspect-video">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/3MNPhH-98Fw" title="Motivasi Sigma" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <p class="mt-8 text-gray-500 italic text-sm">"Jangan biarkan hari ini berlalu tanpa ada kemajuan sedikitpun."</p>
+            <p class="mt-8 text-gray-500 italic text-sm font-mono">"Jangan biarkan hari ini berlalu tanpa ada kemajuan sedikitpun."</p>
         </div>
     </section>
 
     <!-- Hubungi Kami (WhatsApp) -->
     <section class="py-20 px-6">
         <div class="max-w-4xl mx-auto bg-yellow-600 rounded-3xl p-10 md:p-16 flex flex-col items-center text-center shadow-2xl">
-            <h4 class="text-3xl md:text-5xl font-black text-black mb-6 italic">GABUNG MARKAS SIGMA</h4>
-            <p class="text-black font-bold text-lg mb-10 opacity-80 max-w-xl">
+            <h4 class="text-3xl md:text-5xl font-black text-black mb-6 italic uppercase">Gabung Markas Sigma</h4>
+            <p class="text-black font-bold text-lg mb-10 opacity-80 max-w-xl uppercase tracking-tighter">
                 Dapatkan konsultasi grindset langsung ke nomor pribadi saya. Siapkan dirimu untuk transformasi besar.
             </p>
-            <a href="https://wa.me/6281770601202" class="bg-black text-white px-12 py-5 rounded-full font-black text-xl hover:scale-110 transition-transform">CHAT WA: 081770601202</a>
+            <a href="https://wa.me/6281770601202" class="bg-black text-white px-12 py-5 rounded-full font-black text-xl hover:scale-105 transition-transform uppercase italic shadow-[0_0_20px_rgba(0,0,0,0.5)]">Chat WA: 081770601202</a>
         </div>
     </section>
 
-    <!-- Markas Lokasi -->
-    <section id="lokasi" class="py-24 px-6">
+    <!-- Markas Lokasi SMAN 8 -->
+    <section id="lokasi" class="py-24 px-6 bg-neutral-900/30">
         <div class="max-w-6xl mx-auto text-center md:text-left">
             <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="h-[450px] rounded-3xl overflow-hidden border-2 border-neutral-800">
+                <div class="h-[450px] rounded-3xl overflow-hidden border-2 border-neutral-800 shadow-2xl">
+                    <!-- Maps Diupdate Sesuai Gambar Screenshot yang diberikan (Area Jl. Kenari dsk) -->
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.88338950212!2d110.39572627476595!3d-7.791583092228308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599723000001%3A0xc4805822363a0a3b!2sSMA%20Negeri%208%20Yogyakarta!5e0!3m2!1sid!2sid!4v1716300000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
                 <div>
-                    <h3 class="text-4xl font-black text-white mb-6 uppercase italic">Lokasi Pelatihan</h3>
-                    <p class="text-gray-400 text-xl font-light mb-8 italic">"Disiplin dimulai dari sini, SMA Negeri 8 Yogyakarta."</p>
+                    <h3 class="text-4xl font-black text-white mb-6 uppercase italic">Lokasi Pelatihan Pusat</h3>
+                    <p class="text-gray-400 text-xl font-light mb-8 italic">"Disiplin dimulai dari sini, Markas Anti Beta SMAN 8 Yogyakarta."</p>
                     <div class="space-y-4">
-                        <div class="inline-block bg-yellow-600 px-4 py-1 rounded text-black font-bold mb-2">ALAMAT PUSAT</div>
-                        <p class="text-sm text-gray-500 leading-relaxed uppercase tracking-tighter">
-                            Jl. Sidobali No.1, Muja Muju, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55165
+                        <div class="inline-block bg-yellow-600 px-4 py-1 rounded text-black font-black mb-2 tracking-widest uppercase">Pusat Pendidikan</div>
+                        <p class="text-sm text-gray-400 leading-relaxed uppercase font-mono tracking-widest border-l-4 border-yellow-600 pl-4 py-2 bg-black/50">
+                            Jl. Sidobali No.1, Muja Muju, Kec. Umbulharjo, Kota Yogyakarta, DI Yogyakarta 55165<br>
+                            (Berada di dekat kawasan Jl. Kenari dan Jl. Kusumanegara)
                         </p>
                     </div>
                 </div>
@@ -241,11 +377,55 @@
 
     <!-- Footer -->
     <footer class="py-20 text-center border-t border-neutral-900 bg-black font-mono">
-        <h5 class="text-2xl font-black text-white italic mb-4">SIGMA<span class="text-yellow-500">MALE</span></h5>
-        <p class="text-white font-black text-sm uppercase italic">© sigma2026 copyright</p>
+        <h5 class="text-2xl font-black text-white italic mb-4 tracking-widest">SIGMA<span class="text-yellow-500">MALE</span></h5>
+        <p class="text-white font-black text-xs uppercase italic tracking-widest opacity-50">© sigma2026 copyright</p>
     </footer>
+
+    <!-- JAVASCRIPT UNTUK SLIDER OTOMATIS -->
+    <script>
+        let slideIndex = 0;
+        let waktuSlide;
+        const slides = document.querySelectorAll('.slide');
+        const indikators = document.querySelectorAll('.indikator');
+
+        function tampilkanSlide(index) {
+            // Sembunyikan semua slide dan matikan indikator
+            slides.forEach(s => s.classList.remove('aktif'));
+            indikators.forEach(i => i.classList.remove('aktif'));
+
+            // Reset index jika melebihi batas
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            // Tampilkan slide dan indikator aktif
+            slides[slideIndex].classList.add('aktif');
+            indikators[slideIndex].classList.add('aktif');
+        }
+
+        function geserSlide(n) {
+            clearInterval(waktuSlide); // Reset timer jika digeser manual
+            slideIndex += n;
+            tampilkanSlide(slideIndex);
+            mulaiOtomatis(); // Mulai timer lagi
+        }
+
+        function loncatSlide(n) {
+            clearInterval(waktuSlide);
+            slideIndex = n;
+            tampilkanSlide(slideIndex);
+            mulaiOtomatis();
+        }
+
+        function mulaiOtomatis() {
+            waktuSlide = setInterval(() => {
+                slideIndex++;
+                tampilkanSlide(slideIndex);
+            }, 5000); // Ganti slide setiap 5 detik
+        }
+
+        // Mulai slider saat web dimuat
+        mulaiOtomatis();
+    </script>
 
 </body>
 </html>
-
-
